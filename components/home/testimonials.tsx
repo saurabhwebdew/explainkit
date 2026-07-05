@@ -15,7 +15,7 @@ function initials(name: string) {
 
 export function Testimonials() {
   return (
-    <section className="py-24 md:py-32 bg-white border-y border-line">
+    <section className="py-24 md:py-32 bg-surface border-y border-line">
       <Container>
         <SectionTitle eyebrow="Testimonials" title="What it's like to work with us." />
 
@@ -24,9 +24,9 @@ export function Testimonials() {
             <Reveal key={t.name}>
               <motion.div
                 whileHover={{ y: -3 }}
-                className="h-full rounded-2xl p-7 backdrop-blur-md bg-white/60 border border-line shadow-softer flex flex-col"
+                className="h-full rounded-2xl p-7 backdrop-blur-md bg-surface/60 border border-line shadow-softer flex flex-col"
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="#2563EB" className="opacity-80 mb-4">
+                <svg width="24" height="24" viewBox="0 0 24 24" className="fill-accent opacity-80 mb-4">
                   <path d="M7 7h4v4c0 3-2 5-5 5v-2c1.5 0 2.5-1 2.5-2.5H7V7zm8 0h4v4c0 3-2 5-5 5v-2c1.5 0 2.5-1 2.5-2.5h-1.5V7z" />
                 </svg>
                 <p className="text-ink leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</p>
