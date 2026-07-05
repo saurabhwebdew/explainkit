@@ -1,49 +1,68 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Container } from "@/components/ui/container";
-import { SectionTitle } from "@/components/ui/section-title";
-import { RevealGroup, Reveal } from "@/components/ui/reveal";
-import { testimonials } from "@/lib/data";
+import React from "react";
+import { motion } from "motion/react";
 
-function initials(name: string) {
-  return name
-    .split(" ")
-    .map((n) => n[0])
-    .join("");
+export interface Testimonial {
+  text: string;
+  image: string;
+  name: string;
+  role: string;
 }
 
-export function Testimonials() {
-  return (
-    <section className="py-24 md:py-32 bg-white border-y border-line">
-      <Container>
-        <SectionTitle eyebrow="Testimonials" title="What it's like to work with us." />
+interface TestimonialsColumnProps {
+  className?: string;
+  testimonials: Testimonial[];
+  duration?: number;
+}
 
-        <RevealGroup className="grid md:grid-cols-3 gap-6" stagger={0.1}>
-          {testimonials.map((t) => (
-            <Reveal key={t.name}>
-              <motion.div
-                whileHover={{ y: -3 }}
-                className="h-full rounded-2xl p-7 backdrop-blur-md bg-white/60 border border-line shadow-softer flex flex-col"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="#2563EB" className="opacity-80 mb-4">
-                  <path d="M7 7h4v4c0 3-2 5-5 5v-2c1.5 0 2.5-1 2.5-2.5H7V7zm8 0h4v4c0 3-2 5-5 5v-2c1.5 0 2.5-1 2.5-2.5h-1.5V7z" />
-                </svg>
-                <p className="text-ink leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</p>
-                <div className="mt-6 flex items-center gap-3">
-                  <span className="w-9 h-9 rounded-full bg-accent-50 text-accent-700 text-xs font-semibold grid place-items-center">
-                    {initials(t.name)}
-                  </span>
-                  <div>
-                    <p className="text-sm font-medium">{t.name}</p>
-                    <p className="text-xs text-muted">{t.role}</p>
+export const TestimonialsColumn = (props: TestimonialsColumnProps) => {
+  return (
+    <div className={props.className}>
+      <motion.div
+        animate={{
+          translateY: "-50%",
+        }}
+        transition={{
+          duration: props.duration || 10,
+          repeat: Infinity,
+          ease: "linear",
+          repeatType: "loop",
+        }}
+        className="flex flex-col gap-6 pb-6 bg-background"
+      >
+        {[
+          ...new Array(2).fill(0).map((_, index) => (
+            <React.Fragment key={index}>
+              {props.testimonials.map(({ text, image, name, role }, i) => (
+                <div
+                  className="p-10 rounded-3xl border shadow-lg shadow-primary/10 max-w-xs w-full"
+                  key={i}
+                >
+                  <div>{text}</div>
+                  <div className="flex items-center gap-2 mt-5">
+                    <img
+                      width={40}
+                      height={40}
+                      src={image}
+                      alt={name}
+                      className="h-10 w-10 rounded-full"
+                    />
+                    <div className="flex flex-col">
+                      <div className="font-medium tracking-tight leading-5">
+                        {name}
+                      </div>
+                      <div className="leading-5 opacity-60 tracking-tight">
+                        {role}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
-            </Reveal>
-          ))}
-        </RevealGroup>
-      </Container>
-    </section>
+              ))}
+            </React.Fragment>
+          )),
+        ]}
+      </motion.div>
+    </div>
   );
-}
+};
