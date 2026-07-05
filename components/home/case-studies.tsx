@@ -23,7 +23,7 @@ export function CaseStudies() {
               <motion.div
                 whileHover={{ y: -4 }}
                 transition={{ type: "spring", stiffness: 280, damping: 24 }}
-                className="h-full rounded-2xl border border-line bg-white p-7 flex flex-col shadow-softer hover:shadow-soft transition-shadow"
+                className="h-full rounded-2xl border border-line bg-surface p-7 flex flex-col shadow-softer hover:shadow-soft transition-shadow"
               >
                 <span className="text-xs font-medium text-accent-700 bg-accent-50 rounded-full px-2.5 py-1 w-fit">
                   {cs.industry}
