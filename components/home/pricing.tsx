@@ -1,61 +1,71 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionTitle } from "@/components/ui/section-title";
-import { Reveal } from "@/components/ui/reveal";
+import { RevealGroup, Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
-
-const features = [
-  "First premium advantage",
-  "Second advantage weekly",
-  "Third advantage donate to project",
-  "Fourth, access to all components weekly",
-];
+import { pricing } from "@/lib/data";
+import { cn } from "@/lib/utils";
 
 export function PricingPreview() {
   return (
-    <section id="pricing" className="py-24 md:py-32 bg-muted/40">
+    <section id="pricing" className="py-24 md:py-32">
       <Container>
         <SectionTitle
           eyebrow="Pricing"
-          title="Pricing that scales with your business"
-          description="Choose the perfect plan for your needs and start optimizing your workflow today"
+          title="A starting point, not a final quote."
+          description="Every project is scoped after a short discovery call — here's the shape of what that usually looks like."
           align="center"
         />
 
-        <Reveal className="mt-12 md:mt-16">
-          <div className="rounded-2xl border border-line bg-white shadow-softer">
-            <div className="grid items-center gap-12 divide-y divide-line p-8 md:grid-cols-2 md:divide-x md:divide-y-0 md:p-12">
-              <div className="pb-12 text-center md:pb-0 md:pr-12">
-                <h3 className="text-2xl font-semibold">Suite Enterprise</h3>
-                <p className="mt-2 text-lg text-muted">For your company of any size</p>
-                <span className="mb-6 mt-12 inline-block text-6xl font-bold">
-                  <span className="text-4xl">$</span>234
-                </span>
-                <div className="flex justify-center">
-                  <Button href="#contact" size="lg">
-                    Get started
-                  </Button>
-                </div>
-                <p className="mt-12 text-sm text-muted">
-                  Includes: Security, Unlimited Storage, Payment, Search engine, and all features
+        <RevealGroup className="grid md:grid-cols-3 gap-6 items-start" stagger={0.1}>
+          {pricing.map((plan) => (
+            <Reveal key={plan.tier}>
+              <motion.div
+                whileHover={{ y: -4 }}
+                className={cn(
+                  "h-full rounded-2xl p-7 border shadow-softer",
+                  plan.featured
+                    ? "bg-ink text-white border-ink shadow-lift md:scale-[1.03]"
+                    : "bg-surface border-line"
+                )}
+              >
+                <p className={cn("text-sm font-medium", plan.featured ? "text-white/70" : "text-muted")}>
+                  {plan.tier}
                 </p>
-              </div>
+                <p className={cn("mt-1 text-sm", plan.featured ? "text-white/60" : "text-muted")}>
+                  {plan.tagline}
+                </p>
+                <p className="mt-6 text-3xl font-semibold tracking-tight">
+                  {plan.priceFrom}
+                  {plan.priceFrom !== "Custom" && (
+                    <span className={cn("text-sm font-normal", plan.featured ? "text-white/60" : "text-muted")}> starting</span>
+                  )}
+                </p>
 
-              <div>
-                <ul role="list" className="space-y-4">
-                  {features.map((item) => (
-                    <li key={item} className="flex items-center gap-2">
-                      <Check className="size-3 shrink-0 text-accent-600" strokeWidth={3.5} />
-                      <span className="text-ink/80">{item}</span>
+                <ul className="mt-6 space-y-2.5">
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm">
+                      <Check size={15} className={cn("mt-0.5 shrink-0", plan.featured ? "text-white" : "text-accent-600")} />
+                      <span className={plan.featured ? "text-white/90" : "text-ink/80"}>{f}</span>
                     </li>
                   ))}
                 </ul>
-              </div>
-            </div>
-          </div>
-        </Reveal>
+
+                <Button
+                  href="#contact"
+                  size="md"
+                  variant={plan.featured ? "secondary" : "primary"}
+                  className="mt-8 w-full"
+                >
+                  {plan.cta}
+                </Button>
+              </motion.div>
+            </Reveal>
+          ))}
+        </RevealGroup>
       </Container>
     </section>
   );
