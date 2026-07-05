@@ -15,7 +15,7 @@ const sizeClasses: Record<string, string> = {
 
 export function WhyExplainKit() {
   return (
-    <section className="py-24 md:py-32 bg-white border-y border-line">
+    <section className="py-24 md:py-32 bg-surface border-y border-line">
       <Container>
         <SectionTitle
           eyebrow="Why ExplainKit"
