@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionTitle } from "@/components/ui/section-title";
 import { RevealGroup, Reveal } from "@/components/ui/reveal";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { GlowCard } from "@/components/ui/glow-card";
 import { services } from "@/lib/data";
 
 export function Services() {
@@ -24,17 +24,9 @@ export function Services() {
               <motion.div
                 whileHover={{ y: -4 }}
                 transition={{ type: "spring", stiffness: 300, damping: 24 }}
-                className="group relative h-full rounded-2xl border border-line p-2"
+                className="h-full"
               >
-                <GlowingEffect
-                  spread={40}
-                  glow
-                  disabled={false}
-                  proximity={64}
-                  inactiveZone={0.01}
-                  borderWidth={2}
-                />
-                <div className="relative h-full rounded-xl border border-line bg-surface p-6 shadow-softer group-hover:shadow-soft transition-shadow">
+                <GlowCard className="bg-surface p-6 shadow-softer hover:shadow-soft transition-shadow group">
                   <div className="flex items-center justify-between">
                     <span className="w-10 h-10 rounded-xl bg-accent-50 text-accent-700 grid place-items-center font-semibold text-sm">
                       {service.code}
@@ -60,7 +52,7 @@ export function Services() {
                   >
                     Learn more <ArrowUpRight size={14} />
                   </a>
-                </div>
+                </GlowCard>
               </motion.div>
             </Reveal>
           ))}
