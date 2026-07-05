@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { SectionTitle } from "@/components/ui/section-title";
 import { RevealGroup, Reveal } from "@/components/ui/reveal";
+import { GlowCard } from "@/components/ui/glow-card";
 import { bento } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
@@ -28,19 +29,21 @@ export function WhyExplainKit() {
               <motion.div
                 whileHover={{ y: -3 }}
                 transition={{ type: "spring", stiffness: 280, damping: 24 }}
-                className="h-full rounded-2xl bg-canvas border border-line p-6 flex flex-col justify-between"
+                className="h-full"
               >
-                <div>
-                  <h3 className="font-semibold text-lg tracking-tight">{tile.title}</h3>
-                  <p className="mt-2 text-sm text-muted leading-relaxed max-w-[26ch]">
-                    {tile.description}
-                  </p>
-                </div>
-                {tile.metric && (
-                  <span className="font-semibold text-3xl text-accent-600 tracking-tight">
-                    {tile.metric}
-                  </span>
-                )}
+                <GlowCard className="bg-canvas p-6 flex flex-col justify-between" spread={35} proximity={55}>
+                  <div>
+                    <h3 className="font-semibold text-lg tracking-tight">{tile.title}</h3>
+                    <p className="mt-2 text-sm text-muted leading-relaxed max-w-[26ch]">
+                      {tile.description}
+                    </p>
+                  </div>
+                  {tile.metric && (
+                    <span className="font-semibold text-3xl text-accent-600 tracking-tight">
+                      {tile.metric}
+                    </span>
+                  )}
+                </GlowCard>
               </motion.div>
             </Reveal>
           ))}
