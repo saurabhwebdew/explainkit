@@ -12,7 +12,7 @@ export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-24 md:py-32 bg-white border-y border-line">
+    <section id="faq" className="py-24 md:py-32 bg-surface border-y border-line">
       <Container className="max-w-3xl">
         <SectionTitle eyebrow="FAQ" title="Questions, answered plainly." />
 
