@@ -9,17 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        canvas: "#FAFAFA",
-        surface: "#FFFFFF",
-        ink: "#0A0A0B",
-        muted: "#6B7280", // gray-500
-        line: "#E5E7EB",  // gray-200
+        canvas: "rgb(var(--canvas) / <alpha-value>)",
+        surface: "rgb(var(--surface) / <alpha-value>)",
+        "surface-2": "rgb(var(--surface-2) / <alpha-value>)",
+        ink: "rgb(var(--ink) / <alpha-value>)",
+        muted: "rgb(var(--muted) / <alpha-value>)",
+        line: "rgb(var(--line) / <alpha-value>)",
         accent: {
-          DEFAULT: "#2563EB",
-          50: "#EFF4FF",
-          100: "#DBE6FE",
-          600: "#2563EB",
-          700: "#1D4ED8",
+          DEFAULT: "rgb(var(--accent) / <alpha-value>)",
+          50: "rgb(var(--accent-50) / <alpha-value>)",
+          100: "rgb(var(--accent-100) / <alpha-value>)",
+          600: "rgb(var(--accent-600) / <alpha-value>)",
+          700: "rgb(var(--accent-700) / <alpha-value>)",
         },
       },
       fontFamily: {
@@ -44,6 +45,10 @@ const config: Config = {
       },
       maxWidth: {
         content: "1200px",
+      },
+      backgroundImage: {
+        "accent-gradient": "linear-gradient(135deg, rgb(var(--accent-from)), rgb(var(--accent-to)))",
+        "glow-radial": "radial-gradient(circle, rgb(var(--accent-to) / 0.35), transparent 70%)",
       },
       keyframes: {
         marquee: {
