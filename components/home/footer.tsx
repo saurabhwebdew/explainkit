@@ -9,7 +9,7 @@ export function Footer() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <footer className="pt-20 pb-10 border-t border-line bg-white">
+    <footer className="pt-20 pb-10 border-t border-line bg-surface">
       <Container>
         <div className="grid md:grid-cols-[1.4fr_1fr_1fr_1.2fr] gap-10">
           <div>
