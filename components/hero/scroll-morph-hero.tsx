@@ -24,12 +24,12 @@ const cards: CardSpec[] = [
 function CardVisual({ id }: { id: string }) {
   if (id === "explainer") {
     return (
-      <div className="relative w-full h-full rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg,#EFF4FF,#DBE6FE)" }}>
-        <span className="absolute top-3 left-3 text-[10px] font-medium text-accent-700 bg-white/80 rounded-full px-2 py-0.5">Explainer</span>
-        <span className="absolute bottom-3 right-3 text-[11px] font-medium text-accent-700/80">01:24</span>
+      <div className="relative w-full h-full rounded-2xl overflow-hidden bg-accent-gradient">
+        <span className="absolute top-3 left-3 text-[10px] font-medium text-accent-700 bg-surface/80 rounded-full px-2 py-0.5">Explainer</span>
+        <span className="absolute bottom-3 right-3 text-[11px] font-medium text-white/80">01:24</span>
         <span className="absolute inset-0 grid place-items-center">
-          <span className="w-11 h-11 rounded-full bg-white shadow-soft grid place-items-center">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#2563EB"><path d="M8 5v14l11-7z" /></svg>
+          <span className="w-11 h-11 rounded-full bg-surface shadow-soft grid place-items-center">
+            <svg width="14" height="14" viewBox="0 0 24 24" className="fill-accent"><path d="M8 5v14l11-7z" /></svg>
           </span>
         </span>
       </div>
@@ -37,7 +37,7 @@ function CardVisual({ id }: { id: string }) {
   }
   if (id === "demo") {
     return (
-      <div className="relative w-full h-full rounded-2xl bg-white p-3 flex flex-col gap-2">
+      <div className="relative w-full h-full rounded-2xl bg-surface p-3 flex flex-col gap-2 border border-line">
         <div className="flex items-center gap-1.5">
           <span className="w-2 h-2 rounded-full bg-line" />
           <span className="w-2 h-2 rounded-full bg-line" />
@@ -45,7 +45,7 @@ function CardVisual({ id }: { id: string }) {
         </div>
         <div className="flex-1 rounded-lg bg-canvas p-2 flex items-end gap-1.5">
           {[40, 65, 30, 80, 55].map((h, i) => (
-            <div key={i} className="flex-1 rounded-sm bg-accent-600/70" style={{ height: `${h}%` }} />
+            <div key={i} className="flex-1 rounded-sm bg-accent/70" style={{ height: `${h}%` }} />
           ))}
         </div>
         <div className="h-2 w-2/3 rounded bg-line" />
@@ -54,7 +54,7 @@ function CardVisual({ id }: { id: string }) {
   }
   if (id === "motion") {
     return (
-      <div className="relative w-full h-full rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg,#0A0A0B,#1D4ED8)" }}>
+      <div className="relative w-full h-full rounded-2xl overflow-hidden bg-ink">
         <span className="absolute top-3 left-3 text-[10px] font-medium text-white/80 bg-white/10 rounded-full px-2 py-0.5">Motion</span>
         <svg className="absolute inset-0 m-auto" width="46" height="46" viewBox="0 0 46 46">
           <circle cx="23" cy="23" r="16" stroke="white" strokeOpacity="0.5" strokeWidth="2" fill="none" />
@@ -64,8 +64,8 @@ function CardVisual({ id }: { id: string }) {
     );
   }
   return (
-    <div className="relative w-full h-full rounded-2xl bg-white p-4 flex items-center justify-center">
-      <svg width="64" height="40" viewBox="0 0 64 40" fill="none" stroke="#0A0A0B" strokeWidth="1.6" strokeLinecap="round">
+    <div className="relative w-full h-full rounded-2xl bg-surface border border-line p-4 flex items-center justify-center">
+      <svg width="64" height="40" viewBox="0 0 64 40" fill="none" className="stroke-ink" strokeWidth="1.6" strokeLinecap="round">
         <path d="M4 30 C 18 6, 40 6, 60 20" strokeDasharray="3 4" />
         <path d="M52 14 L60 20 L52 26" />
       </svg>
@@ -95,7 +95,11 @@ export function ScrollMorphHero() {
       style={{ height: prefersReduced ? "auto" : "260vh" }}
     >
       <div className={cnSticky(prefersReduced)}>
-        <div className="max-w-content mx-auto px-6 md:px-10 w-full">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-20 right-0 w-[420px] h-[420px] bg-glow-radial opacity-60"
+        />
+        <div className="max-w-content mx-auto px-6 md:px-10 w-full relative">
           <motion.div
             className="text-center max-w-3xl mx-auto"
             style={prefersReduced ? undefined : { y: headlineY, scale: headlineScale }}
@@ -103,7 +107,7 @@ export function ScrollMorphHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3 py-1 text-xs font-medium text-muted mb-7">
+            <p className="inline-flex items-center gap-2 rounded-full border border-line bg-accent-50 px-3 py-1 text-xs font-medium text-accent mb-7">
               Video production for SaaS teams
             </p>
             <h1 className="font-semibold tracking-tight leading-[1.04] text-[clamp(2.25rem,5.4vw,4.25rem)] text-ink balance">
