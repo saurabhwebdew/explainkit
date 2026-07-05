@@ -8,7 +8,7 @@ import { process } from "@/lib/data";
 
 export function HowItWorks() {
   return (
-    <section id="process" className="py-24 md:py-32 bg-white border-y border-line">
+    <section id="process" className="py-24 md:py-32 bg-surface border-y border-line">
       <Container>
         <SectionTitle eyebrow="How It Works" title="Five steps, no surprises in the middle." />
 
