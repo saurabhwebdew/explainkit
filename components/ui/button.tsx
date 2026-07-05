@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 type ButtonProps = {
   children: ReactNode;
@@ -37,18 +38,32 @@ export function Button({
   type = "button",
 }: ButtonProps) {
   const classes = cn(base, variants[variant], sizes[size], className);
+  const isPrimary = variant === "primary";
 
-  if (href) {
-    return (
-      <Link href={href} className={classes}>
-        {children}
-      </Link>
-    );
-  }
-
-  return (
+  const content = href ? (
+    <Link href={href} className={classes}>
+      {children}
+    </Link>
+  ) : (
     <button type={type} onClick={onClick} className={classes}>
       {children}
     </button>
+  );
+
+  if (!isPrimary) return content;
+
+  return (
+    <span className="relative inline-flex rounded-full">
+      <GlowingEffect
+        spread={30}
+        glow
+        disabled={false}
+        proximity={60}
+        inactiveZone={0.01}
+        borderWidth={2}
+        className="rounded-full"
+      />
+      {content}
+    </span>
   );
 }
