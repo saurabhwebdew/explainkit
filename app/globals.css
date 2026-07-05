@@ -2,18 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Ice White system (light mode) */
+  --canvas: 245 247 250;      /* #F5F7FA */
+  --surface: 255 255 255;     /* #FFFFFF */
+  --surface-2: 241 245 249;   /* #EEF2F7 */
+  --ink: 30 41 59;            /* #1E293B */
+  --muted: 100 116 139;       /* #64748B */
+  --line: 226 232 240;        /* #E2E8F0 */
+
+  /* Royal Violet accent (light mode) */
+  --accent: 109 40 217;       /* #6D28D9 */
+  --accent-50: 245 243 255;   /* #F5F3FF */
+  --accent-100: 237 233 254;  /* #EDE9FE */
+  --accent-600: 124 58 237;   /* #7C3AED */
+  --accent-700: 109 40 217;   /* #6D28D9 */
+  --accent-from: 124 58 237;  /* gradient start #7C3AED */
+  --accent-to: 109 40 217;    /* gradient end #6D28D9 */
+}
+
+.dark {
+  /* Deep Midnight Slate system (dark mode) */
+  --canvas: 15 23 42;         /* #0F172A */
+  --surface: 30 41 59;        /* #1E293B */
+  --surface-2: 51 65 85;      /* #334155 */
+  --ink: 248 250 252;         /* #F8FAFC */
+  --muted: 148 163 184;       /* #94A3B8 */
+  --line: 51 65 85;           /* #334155 */
+
+  /* Electric Lavender accent (dark mode) */
+  --accent: 167 139 250;      /* #A78BFA */
+  --accent-50: 49 46 78;      /* dark tint for badges */
+  --accent-100: 67 56 105;
+  --accent-600: 167 139 250;  /* #A78BFA */
+  --accent-700: 196 181 253;  /* lighter for hover in dark */
+  --accent-from: 167 139 250; /* gradient start #A78BFA */
+  --accent-to: 109 40 217;    /* gradient end #6D28D9 */
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: #FAFAFA;
-  color: #0A0A0B;
+  background-color: rgb(var(--canvas));
+  color: rgb(var(--ink));
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 ::selection {
-  background: #2563EB;
-  color: #FFFFFF;
+  background: rgb(var(--accent));
+  color: rgb(var(--canvas));
 }
 
 a:focus-visible,
@@ -21,7 +60,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid #2563EB;
+  outline: 2px solid rgb(var(--accent));
   outline-offset: 3px;
   border-radius: 4px;
 }
