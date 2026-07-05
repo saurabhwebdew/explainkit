@@ -23,7 +23,7 @@ export function Services() {
               <motion.div
                 whileHover={{ y: -4 }}
                 transition={{ type: "spring", stiffness: 300, damping: 24 }}
-                className="group h-full rounded-2xl border border-line bg-white p-7 shadow-softer hover:shadow-soft transition-shadow"
+                className="group h-full rounded-2xl border border-line bg-surface p-7 shadow-softer hover:shadow-soft transition-shadow"
               >
                 <div className="flex items-center justify-between">
                   <span className="w-10 h-10 rounded-xl bg-accent-50 text-accent-700 grid place-items-center font-semibold text-sm">
