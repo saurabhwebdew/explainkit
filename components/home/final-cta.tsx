@@ -18,7 +18,7 @@ export function FinalCta() {
         style={{ x: blobX, rotate: blobRotate }}
         className="absolute -top-32 left-1/2 -translate-x-1/2 w-[560px] h-[560px] rounded-full opacity-[0.07] blur-3xl pointer-events-none"
       >
-        <div className="w-full h-full rounded-full" style={{ background: "linear-gradient(135deg,#0A0A0B,#2563EB)" }} />
+        <div className="w-full h-full rounded-full bg-accent-gradient" />
       </motion.div>
 
       <div className="relative max-w-2xl mx-auto px-6 text-center">
