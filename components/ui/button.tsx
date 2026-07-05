@@ -16,8 +16,9 @@ const base =
   "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 focus-visible:outline-none";
 
 const variants: Record<NonNullable<ButtonProps["variant"]>, string> = {
-  primary: "bg-accent text-white hover:bg-accent-700 shadow-soft hover:shadow-lift",
-  secondary: "bg-white text-ink border border-line hover:border-ink/20 shadow-softer",
+  primary:
+    "bg-accent-gradient text-white dark:text-canvas shadow-soft hover:shadow-lift hover:brightness-110",
+  secondary: "bg-surface text-ink border border-line hover:border-ink/20 shadow-softer",
   ghost: "text-ink hover:bg-ink/5",
 };
 
