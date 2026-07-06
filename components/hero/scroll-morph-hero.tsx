@@ -108,7 +108,7 @@ export function ScrollMorphHero() {
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="inline-flex items-center gap-2 rounded-full border border-line bg-accent-50 px-3 py-1 text-xs font-medium text-accent mb-7">
-              Video production for SaaS teams
+              Explainer videos that convert & educate
             </p>
             <h1 className="font-semibold tracking-tight leading-[1.04] text-[clamp(2.25rem,5.4vw,4.25rem)] text-ink balance">
               Turn Complex Products Into Stories People Remember.
