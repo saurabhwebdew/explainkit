@@ -48,6 +48,7 @@ body {
   background-color: rgb(var(--canvas));
   color: rgb(var(--ink));
   transition: background-color 0.2s ease, color 0.2s ease;
+  overflow-x: hidden;
 }
 
 ::selection {
