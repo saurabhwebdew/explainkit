@@ -133,7 +133,14 @@ export function ScrollMorphHero() {
 
           <div className="relative h-[220px] sm:h-[260px] md:h-[340px] mt-6 sm:mt-10 md:mt-20">
             {cards.map((card, i) => (
-              <HeroCard key={card.id} card={card} progress={progress} simple={simple} index={i} />
+              <HeroCard
+                key={card.id}
+                card={card}
+                progress={progress}
+                simple={simple}
+                prefersReduced={prefersReduced}
+                index={i}
+              />
             ))}
           </div>
         </div>
@@ -156,11 +163,13 @@ function HeroCard({
   card,
   progress,
   simple,
+  prefersReduced,
   index,
 }: {
   card: CardSpec;
   progress: ReturnType<typeof useSpring>;
   simple: boolean;
+  prefersReduced: boolean;
   index: number;
 }) {
   // Starts at 0 (not 0.05+) so the very first scroll pixel already moves the
@@ -171,14 +180,46 @@ function HeroCard({
   const y = useTransform(progress, range, [card.scatter.y, card.grid.y]);
   const rotate = useTransform(progress, range, [card.scatter.rotate, 0]);
 
-  const style = simple
-    ? { left: `calc(50% + ${card.grid.x}px)`, top: card.grid.y }
-    : { x, y, rotate, left: "50%", top: 0 };
+  if (simple) {
+    const gridStyle = { left: `calc(50% + ${card.grid.x}px)`, top: card.grid.y };
+
+    if (prefersReduced) {
+      // True OS-level reduced-motion request: no movement at all, just present.
+      return (
+        <div className="absolute w-[150px] h-[190px] md:w-[190px] md:h-[240px] -translate-x-1/2 shadow-lift" style={gridStyle}>
+          <CardVisual id={card.id} />
+        </div>
+      );
+    }
+
+    // Mobile (but motion is otherwise fine): same "scatter flies into grid"
+    // effect as desktop, but time-based on mount instead of scroll-driven — so
+    // it still animates without needing the sticky/overflow-hidden pattern
+    // that clipped it before. Final position is the static grid slot; x/y
+    // start offset by the scatter delta and animate down to 0.
+    return (
+      <motion.div
+        className="absolute w-[150px] h-[190px] md:w-[190px] md:h-[240px] -translate-x-1/2 shadow-lift"
+        style={gridStyle}
+        initial={{
+          opacity: 0,
+          scale: 0.85,
+          x: card.scatter.x - card.grid.x,
+          y: card.scatter.y - card.grid.y,
+          rotate: card.scatter.rotate,
+        }}
+        animate={{ opacity: 1, scale: 1, x: 0, y: 0, rotate: 0 }}
+        transition={{ duration: 0.7, delay: 0.15 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <CardVisual id={card.id} />
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
       className="absolute w-[150px] h-[190px] md:w-[190px] md:h-[240px] -translate-x-1/2 shadow-lift"
-      style={style as any}
+      style={{ x, y, rotate, left: "50%", top: 0 } as any}
       initial={{ opacity: 0, scale: 0.85 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, delay: 0.15 + index * 0.08, ease: [0.16, 1, 0.3, 1] }}
