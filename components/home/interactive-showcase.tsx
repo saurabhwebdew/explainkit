@@ -39,7 +39,7 @@ export function InteractiveShowcase() {
         </div>
 
         <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 items-center">
-          <Reveal className="rounded-2xl3 bg-ink relative overflow-hidden aspect-video shadow-lift">
+          <Reveal className="rounded-xl3 bg-ink relative overflow-hidden aspect-video shadow-lift">
             <AnimatePresence mode="wait">
               <motion.div
                 key={tab.label}
