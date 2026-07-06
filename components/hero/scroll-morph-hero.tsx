@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { useReducedMotion } from "@/hooks/use-media-query";
+import { useReducedMotion, useMediaQuery } from "@/hooks/use-media-query";
 
 type CardSpec = {
   id: string;
@@ -76,6 +76,16 @@ function CardVisual({ id }: { id: string }) {
 export function ScrollMorphHero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReduced = useReducedMotion();
+  const isMobile = useMediaQuery("(max-width: 767px)");
+  // The sticky + overflow-hidden + scroll-scrubbed pattern below only works when
+  // ALL static content (text + cards) fits inside one screen height — scrolling
+  // only drives x/y/rotate motion values, it never moves the cards' position
+  // within the frame. On mobile, text + 4 cards is taller than the viewport, so
+  // the cards sit below the visible frame and get clipped by overflow-hidden —
+  // permanently, not "until you scroll enough". So small screens skip the whole
+  // scroll-scrub mechanism and use the simple static layout instead, same as
+  // the reduced-motion path.
+  const simple = prefersReduced || isMobile;
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -91,10 +101,9 @@ export function ScrollMorphHero() {
     <section
       ref={containerRef}
       id="home"
-      className="relative"
-      style={{ height: prefersReduced ? "auto" : "260vh" }}
+      className={simple ? "relative h-auto" : "relative h-[220vh] md:h-[260vh]"}
     >
-      <div className={cnSticky(prefersReduced)}>
+      <div className={cnSticky(simple)}>
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-20 right-0 w-[420px] h-[420px] bg-glow-radial opacity-60"
@@ -102,29 +111,29 @@ export function ScrollMorphHero() {
         <div className="max-w-content mx-auto px-6 md:px-10 w-full relative">
           <motion.div
             className="text-center max-w-3xl mx-auto"
-            style={prefersReduced ? undefined : { y: headlineY, scale: headlineScale }}
+            style={simple ? undefined : { y: headlineY, scale: headlineScale }}
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="inline-flex items-center gap-2 rounded-full border border-line bg-accent-50 px-3 py-1 text-xs font-medium text-accent mb-7">
+            <p className="inline-flex items-center gap-2 rounded-full border border-line bg-accent-50 px-3 py-1 text-xs font-medium text-accent mb-4 sm:mb-7">
               Explainer videos that convert & educate
             </p>
-            <h1 className="font-semibold tracking-tight leading-[1.04] text-[clamp(2.25rem,5.4vw,4.25rem)] text-ink balance">
+            <h1 className="font-semibold tracking-tight leading-[1.04] text-[clamp(1.9rem,6vw,4.25rem)] text-ink balance">
               Turn Complex Products Into Stories People Remember.
             </h1>
-            <p className="mt-5 text-lg text-muted leading-relaxed max-w-xl mx-auto">
+            <p className="mt-3 sm:mt-5 text-base sm:text-lg text-muted leading-relaxed max-w-xl mx-auto">
               Create beautiful explainer videos, product demos, and AI-powered marketing content in days instead of weeks.
             </p>
-            <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="mt-5 sm:mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Button href="#contact" size="lg">Start a Project</Button>
               <Button href="#showcase" variant="secondary" size="lg">Watch Demo</Button>
             </div>
           </motion.div>
 
-          <div className="relative h-[300px] md:h-[340px] mt-16 md:mt-20">
+          <div className="relative h-[220px] sm:h-[260px] md:h-[340px] mt-6 sm:mt-10 md:mt-20">
             {cards.map((card, i) => (
-              <HeroCard key={card.id} card={card} progress={progress} prefersReduced={prefersReduced} index={i} />
+              <HeroCard key={card.id} card={card} progress={progress} simple={simple} index={i} />
             ))}
           </div>
         </div>
@@ -133,40 +142,36 @@ export function ScrollMorphHero() {
   );
 }
 
-function cnSticky(prefersReduced: boolean) {
-  return prefersReduced
-    ? "relative pt-28 pb-16 flex flex-col justify-center"
+function cnSticky(simple: boolean) {
+  return simple
+    ? "relative pt-24 sm:pt-28 pb-10 flex flex-col justify-center"
     // justify-start (not justify-center) is deliberate: centering inside a fixed
     // h-screen box overflows equally above AND below when content is taller than
-    // the viewport (e.g. a short/non-fullscreen window). That overflow-above is
-    // exactly what pushed the eyebrow badge behind the fixed navbar. Anchoring
-    // from the top with a fixed pt guarantees the content can only ever grow
-    // downward, never up into the nav — regardless of viewport height.
-    : "sticky top-0 h-screen pt-32 md:pt-36 pb-10 flex flex-col justify-start overflow-hidden";
+    // the viewport. Anchoring from the top with a fixed pt guarantees the
+    // content can only ever grow downward, never up into the nav.
+    : "sticky top-0 h-screen pt-28 md:pt-36 pb-6 flex flex-col justify-start overflow-hidden";
 }
 
 function HeroCard({
   card,
   progress,
-  prefersReduced,
+  simple,
   index,
 }: {
   card: CardSpec;
   progress: ReturnType<typeof useSpring>;
-  prefersReduced: boolean;
+  simple: boolean;
   index: number;
 }) {
-  const range: [number, number] = [0.05 + index * 0.03, 0.55 + index * 0.03];
-  // Position/rotation still morph from scattered → grid as the user scrolls —
-  // that's the intended effect. But visibility must NOT depend on scroll progress,
-  // or the cards are invisible on first paint (progress starts at 0) and the hero
-  // looks broken until the visitor scrolls. Opacity/scale entrance is handled
-  // separately below via a one-time mount animation instead.
+  // Starts at 0 (not 0.05+) so the very first scroll pixel already moves the
+  // cards, and finishes by ~0.4-0.48 so assembly completes within one normal
+  // scroll on the desktop/tablet sizes that still use this scroll-scrub path.
+  const range: [number, number] = [index * 0.02, 0.4 + index * 0.02];
   const x = useTransform(progress, range, [card.scatter.x, card.grid.x]);
   const y = useTransform(progress, range, [card.scatter.y, card.grid.y]);
   const rotate = useTransform(progress, range, [card.scatter.rotate, 0]);
 
-  const style = prefersReduced
+  const style = simple
     ? { left: `calc(50% + ${card.grid.x}px)`, top: card.grid.y }
     : { x, y, rotate, left: "50%", top: 0 };
 
