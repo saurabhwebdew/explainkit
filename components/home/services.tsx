@@ -18,37 +18,39 @@ export function Services() {
           description="From first-touch explainer to in-product walkthrough — built by people who specialize in video, not a generalist agency roster."
         />
 
-        <RevealGroup className="grid sm:grid-cols-2 gap-5" stagger={0.1}>
+        <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" stagger={0.08}>
           {services.map((service) => (
-            <Reveal as="div" key={service.code}>
+            <Reveal as="div" key={service.code} className="h-full">
               <motion.div
                 whileHover={{ y: -4 }}
                 transition={{ type: "spring", stiffness: 300, damping: 24 }}
                 className="h-full"
               >
-                <GlowCard className="bg-surface p-6 shadow-softer hover:shadow-soft transition-shadow group">
-                  <div className="flex items-center justify-between">
-                    <span className="w-10 h-10 rounded-xl bg-accent-50 text-accent-700 grid place-items-center font-semibold text-sm">
-                      {service.code}
-                    </span>
-                    <ArrowUpRight
-                      size={18}
-                      className="text-muted opacity-0 -translate-x-1 translate-y-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all"
-                    />
-                  </div>
-                  <h3 className="font-semibold text-xl mt-5 tracking-tight">{service.title}</h3>
-                  <p className="mt-2.5 text-muted leading-relaxed">{service.description}</p>
-                  <ul className="mt-5 space-y-1.5">
+                <GlowCard
+                  className="bg-surface p-7 flex flex-col h-full shadow-softer hover:shadow-soft transition-shadow group"
+                  spread={35}
+                  proximity={55}
+                >
+                  {/* Monospace code badge — matches the reference's terminal-style service tags */}
+                  <span className="w-11 h-11 rounded-lg bg-accent-50 border border-accent-100 text-accent-700 grid place-items-center font-mono text-xs font-semibold tracking-wide">
+                    {service.code}
+                  </span>
+
+                  <h3 className="font-semibold text-lg mt-6 tracking-tight">{service.title}</h3>
+                  <p className="mt-2.5 text-sm text-muted leading-relaxed">{service.description}</p>
+
+                  <ul className="mt-5 space-y-2 flex-1">
                     {service.bullets.map((b) => (
-                      <li key={b} className="text-sm text-ink/70 flex items-start gap-2">
-                        <span className="mt-2 w-1 h-1 rounded-full bg-accent-600 shrink-0" />
+                      <li key={b} className="text-[13px] text-muted pl-4 relative leading-relaxed">
+                        <span className="absolute left-0 text-accent-600">—</span>
                         {b}
                       </li>
                     ))}
                   </ul>
+
                   <a
                     href="#contact"
-                    className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-accent-700 hover:gap-2 transition-all"
+                    className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-ink border-b border-accent-600 w-fit pb-0.5 group-hover:gap-2 transition-all"
                   >
                     Learn more <ArrowUpRight size={14} />
                   </a>
