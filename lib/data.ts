@@ -27,64 +27,66 @@ export const services = [
     code: "EX",
     title: "Explainer Videos",
     description:
-      "60 seconds that turn your onboarding call into something people watch before they ever talk to sales.",
-    bullets: ["Script & storyboard included", "2D & character animation", "Whiteboard style available"],
+      "A 30–90 second explainer that turns a complicated pitch into something a prospect actually understands on the first watch.",
+    bullets: ["Full script & storyboard included", "Brand-matched visuals & tone", "Voiceover in 40+ languages"],
   },
   {
     code: "PD",
-    title: "Interactive Product Demos",
+    title: "Product Explainer & Demo Videos",
     description:
-      "Clickable walkthroughs and demo videos that let prospects experience the product without a login.",
-    bullets: ["Real UI capture", "Guided click-paths", "Embeds on any landing page"],
+      "Bring your product to life on screen — real UI, guided walkthroughs, and messaging built to move a viewer toward action.",
+    bullets: ["Real UI capture & animation", "Clear, benefit-first narrative", "Built for landing pages & sales calls"],
   },
   {
     code: "MG",
     title: "Motion Graphics",
     description:
-      "Data, diagrams, and UI given enough motion to hold attention in a feed built to ignore everything.",
-    bullets: ["Brand-matched design system", "Social & ad cutdowns", "Loop-ready formats"],
+      "Data, diagrams, and product moments given enough motion to hold attention on channels built to ignore everything else.",
+    bullets: ["Kinetic typography", "Social & ad cutdowns", "Loop-ready formats"],
   },
   {
     code: "AI",
-    title: "AI Content Creation",
+    title: "AI-Assisted Content Creation",
     description:
-      "AI-assisted scripting, voiceover, and iteration so revisions take hours, not another two-week cycle.",
+      "AI-accelerated scripting, voiceover, and iteration so revisions take hours — without losing a human hand on direction and craft.",
     bullets: ["AI voiceover in 40+ languages", "Rapid concept variants", "Human-directed, not autopilot"],
   },
 ];
 
 export const bento = [
   {
-    title: "Faster Production",
-    description: "First cut in 5 business days, not 5 weeks.",
+    title: "Increased Clarity",
+    description: "Complex ideas, explained in a way your audience gets in one watch.",
     size: "lg",
-    metric: "5 days",
+    metric: "30–90s",
   },
   {
-    title: "Unlimited Revisions",
-    description: "Iterate until it's right, on every plan.",
+    title: "Enhanced Engagement",
+    description: "Built to hold attention, not just fill space on the page.",
     size: "sm",
+    metric: "+20%",
   },
   {
-    title: "AI-Assisted",
-    description: "AI handles the grunt work, our editors handle the craft.",
+    title: "Improved Conversion",
+    description: "Every video is scripted around the action you want a viewer to take next.",
     size: "sm",
+    metric: "6x",
   },
   {
-    title: "Dedicated Team",
-    description: "The same writer, designer, and editor for every project — no re-briefing a new freelancer each time.",
+    title: "Two Revision Rounds Included",
+    description: "Every project ships with structured feedback rounds built into the timeline — no surprise costs for getting it right.",
     size: "md",
   },
   {
-    title: "Global Delivery",
-    description: "Teams across 4 time zones, so production doesn't stop when yours does.",
+    title: "SEO & Multi-Platform Ready",
+    description: "Delivered in formats built for your site, landing pages, and social feeds.",
     size: "sm",
   },
   {
-    title: "High Conversion",
-    description: "Built to move a viewer to the next step, not just to look good.",
+    title: "Qualified Leads Driven",
+    description: "Video built as a marketing asset, not just a creative deliverable.",
     size: "sm",
-    metric: "+34%",
+    metric: "2K+",
   },
 ];
 
@@ -116,27 +118,27 @@ export const process = [
   {
     step: "01",
     title: "Discovery",
-    description: "A working session on your product, audience, and the one thing the video has to land.",
+    description: "We start with your goals, your audience, and what your competitors are already getting wrong.",
   },
   {
     step: "02",
     title: "Script",
-    description: "A tight, reviewed script before anyone touches a design tool.",
+    description: "A structured, reviewed script that turns your product into a narrative before anyone touches a design tool.",
   },
   {
     step: "03",
     title: "Storyboard",
-    description: "The full video on paper, so surprises happen here — not in animation.",
+    description: "The full video visualized on paper first, so surprises happen here — not in animation.",
   },
   {
     step: "04",
-    title: "Animation",
-    description: "Full production with checkpoints, not a black box until the final cut.",
+    title: "Production",
+    description: "Voice selection, animation, and sound design come together with checkpoints, not a black box until the final cut.",
   },
   {
     step: "05",
     title: "Delivery",
-    description: "Every format you need to publish, plus a revision window after it's live.",
+    description: "Final files in every format you need, plus two rounds of revisions built into every project.",
   },
 ];
 
@@ -167,19 +169,19 @@ export const caseStudies = [
 export const testimonials = [
   {
     quote:
-      "The storyboard step alone saved us from a version of this video that would've missed the point entirely.",
+      "The storyboard step alone saved us from a version of this video that would've missed the point entirely. Communication was smooth from day one.",
     name: "Priya Shah",
     role: "VP of Product Marketing, Northwind Robotics",
   },
   {
     quote:
-      "We stopped treating video as a launch-week scramble. Now it's just part of how we ship features.",
+      "Every revision request was handled without pushback or delay. We stopped treating video as a launch-week scramble — it's just part of how we ship now.",
     name: "Marcus Webb",
     role: "Head of Growth, Fintra",
   },
   {
     quote:
-      "Our AE team uses the demo video more than the actual product tour. That's the whole point.",
+      "They translated our feedback into polished animation faster than any team we've worked with. Our AE team uses the demo more than the actual product tour.",
     name: "Elena Ruiz",
     role: "Director of Sales, Skyway Labs",
   },
@@ -190,14 +192,14 @@ export const pricing = [
     tier: "Starter",
     tagline: "One video, done right",
     priceFrom: "$2,900",
-    features: ["1 explainer or demo video", "Script & storyboard", "2 revision rounds"],
+    features: ["1 explainer or demo video (MP4, Full HD)", "Full script & storyboard", "2 revision rounds included"],
     cta: "Book Consultation",
   },
   {
     tier: "Growth",
     tagline: "For teams shipping video regularly",
     priceFrom: "$6,500",
-    features: ["3 videos / month", "Dedicated creative team", "Unlimited revisions", "AI voiceover included"],
+    features: ["3 videos / month", "Dedicated creative team", "Unlimited revisions", "AI voiceover in 40+ languages"],
     cta: "Book Consultation",
     featured: true,
   },
@@ -212,20 +214,28 @@ export const pricing = [
 
 export const faq = [
   {
+    q: "How long should our explainer video be?",
+    a: "Most explainer videos run 30–90 seconds, depending on how complex your message is and who you're speaking to. We'll recommend a length during Discovery rather than defaulting to one number.",
+  },
+  {
+    q: "Do you handle scripting and concept development, or do we need one already?",
+    a: "That's most clients. We handle the full process — from your requirements to a structured, reviewed script — during the Discovery and Script phases.",
+  },
+  {
+    q: "Can the video match our brand guidelines?",
+    a: "Yes. Visuals, colors, typography, and tone are aligned with your brand system from the first storyboard, not adjusted after the fact.",
+  },
+  {
+    q: "Is voiceover included?",
+    a: "Yes — voiceover is available in 40+ languages, and we'll help you pick a voice and tone that fits the brand.",
+  },
+  {
+    q: "Where can we use the finished video?",
+    a: "Anywhere your funnel needs it: website, landing pages, social, product pages, email campaigns, trade shows, and sales presentations. We deliver formats built for each.",
+  },
+  {
     q: "How long does a typical project take?",
-    a: "Most explainer and demo videos ship in 5–10 business days from a locked script. Enterprise and compliance-heavy projects run longer depending on review cycles.",
-  },
-  {
-    q: "Do you work with our existing brand guidelines?",
-    a: "Yes — every project starts by mapping your existing brand system into our motion and design language, not the other way around.",
-  },
-  {
-    q: "What if we don't have a script yet?",
-    a: "That's most clients. Scripting is part of every package, built collaboratively with your team during the Discovery and Script phases.",
-  },
-  {
-    q: "Can you match an existing video style we've used before?",
-    a: "Generally yes, if you can share references. We'll flag upfront if a specific style would work against the goal of the video.",
+    a: "Most explainer and demo videos are completed within a few weeks, including two rounds of revisions. Projects involving 3D animation typically run 24–30 business days.",
   },
   {
     q: "How many revisions are included?",
