@@ -151,20 +151,26 @@ function HeroCard({
   index: number;
 }) {
   const range: [number, number] = [0.05 + index * 0.03, 0.55 + index * 0.03];
+  // Position/rotation still morph from scattered → grid as the user scrolls —
+  // that's the intended effect. But visibility must NOT depend on scroll progress,
+  // or the cards are invisible on first paint (progress starts at 0) and the hero
+  // looks broken until the visitor scrolls. Opacity/scale entrance is handled
+  // separately below via a one-time mount animation instead.
   const x = useTransform(progress, range, [card.scatter.x, card.grid.x]);
   const y = useTransform(progress, range, [card.scatter.y, card.grid.y]);
   const rotate = useTransform(progress, range, [card.scatter.rotate, 0]);
-  const scale = useTransform(progress, [0, range[0]], [0.85, 1]);
-  const opacity = useTransform(progress, [0, range[0] + 0.05], [0, 1]);
 
   const style = prefersReduced
     ? { left: `calc(50% + ${card.grid.x}px)`, top: card.grid.y }
-    : { x, y: prefersReduced ? undefined : y, rotate, scale, opacity, left: "50%", top: 0 };
+    : { x, y, rotate, left: "50%", top: 0 };
 
   return (
     <motion.div
       className="absolute w-[150px] h-[190px] md:w-[190px] md:h-[240px] -translate-x-1/2 shadow-lift"
       style={style as any}
+      initial={{ opacity: 0, scale: 0.85 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6, delay: 0.15 + index * 0.08, ease: [0.16, 1, 0.3, 1] }}
     >
       <CardVisual id={card.id} />
     </motion.div>
