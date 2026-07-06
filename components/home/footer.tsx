@@ -15,7 +15,7 @@ export function Footer() {
           <div>
             <p className="font-semibold tracking-tight text-lg">ExplainKit</p>
             <p className="mt-3 text-sm text-muted max-w-xs leading-relaxed">
-              Video production for SaaS teams whose product deserves to be understood in under a minute.
+              Explainer videos and product demos that convert, educate, and help SaaS brands stand out.
             </p>
             <div className="mt-5 flex items-center gap-4">
               {socials.map((s) => (
