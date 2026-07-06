@@ -136,7 +136,13 @@ export function ScrollMorphHero() {
 function cnSticky(prefersReduced: boolean) {
   return prefersReduced
     ? "relative pt-28 pb-16 flex flex-col justify-center"
-    : "sticky top-0 h-screen pt-24 md:pt-28 pb-10 flex flex-col justify-center overflow-hidden";
+    // justify-start (not justify-center) is deliberate: centering inside a fixed
+    // h-screen box overflows equally above AND below when content is taller than
+    // the viewport (e.g. a short/non-fullscreen window). That overflow-above is
+    // exactly what pushed the eyebrow badge behind the fixed navbar. Anchoring
+    // from the top with a fixed pt guarantees the content can only ever grow
+    // downward, never up into the nav — regardless of viewport height.
+    : "sticky top-0 h-screen pt-32 md:pt-36 pb-10 flex flex-col justify-start overflow-hidden";
 }
 
 function HeroCard({
