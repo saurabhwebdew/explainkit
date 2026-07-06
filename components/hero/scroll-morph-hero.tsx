@@ -136,7 +136,7 @@ export function ScrollMorphHero() {
 function cnSticky(prefersReduced: boolean) {
   return prefersReduced
     ? "relative pt-28 pb-16 flex flex-col justify-center"
-    : "sticky top-0 h-screen flex flex-col justify-center overflow-hidden";
+    : "sticky top-0 h-screen pt-24 md:pt-28 pb-10 flex flex-col justify-center overflow-hidden";
 }
 
 function HeroCard({
