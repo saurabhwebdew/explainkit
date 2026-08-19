@@ -1,1 +1,1 @@
-# explainkit
+# explainkit.com
